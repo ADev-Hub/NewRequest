@@ -99,7 +99,7 @@ const DashboardProfile = (props: any) => {
       }));
       getLoggedInUserGroups(currentUser.Id);
     } catch (error) {
-      util.writeErrorLog('DashBoardProfile.tsx', 'getLoggedInUserDetails', error.status.toString(), LogLevel.Error, error.message);
+      util.writeErrorLog('DashboardProfile.tsx', 'getLoggedInUserDetails', error.status.toString(), LogLevel.Error, error.message);
     }
   };
 
@@ -132,7 +132,7 @@ const DashboardProfile = (props: any) => {
       }
       getRequests();
     } catch (error) {
-      util.writeErrorLog('DashBoardProfile.tsx', 'getLoggedInUserGroups', error.status.toString(), LogLevel.Error, error.message);
+      util.writeErrorLog('DashboardProfile.tsx', 'getLoggedInUserGroups', error.status.toString(), LogLevel.Error, error.message);
     }
   }
 
@@ -188,7 +188,7 @@ const DashboardProfile = (props: any) => {
       copyConfigpermission = object;
       setConfigPermission(object);
     } catch (error) {
-      util.writeErrorLog("DashBoardProfile.tsx", "getConfigValues", error.status.toString(), LogLevel.Error, error.responseText);
+      util.writeErrorLog("DashboardProfile.tsx", "getConfigValues", error.status.toString(), LogLevel.Error, error.responseText);
       console.log(error)
     }
   };
@@ -202,7 +202,7 @@ const DashboardProfile = (props: any) => {
       }));
       copysiteGroups = siteGroups
     } catch (error) {
-      util.writeErrorLog('DashBoardProfile.tsx', 'getAllSiteGroups', error.status.toString(), LogLevel.Error, error.message);
+      util.writeErrorLog('DashboardProfile.tsx', 'getAllSiteGroups', error.status.toString(), LogLevel.Error, error.message);
     }
   };
 
@@ -231,7 +231,7 @@ const DashboardProfile = (props: any) => {
 
 
     } catch (error: any) {
-      util.writeErrorLog("DashBoardProfile.tsx", "getRequests", error.status.toString(), LogLevel.Error, error.responseText);
+      util.writeErrorLog("DashboardProfile.tsx", "getRequests", error.status.toString(), LogLevel.Error, error.responseText);
       console.log(error)
     }
   };
