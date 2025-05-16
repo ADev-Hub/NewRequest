@@ -1,0 +1,47 @@
+export interface IDashboardProps {
+  description?: string;
+  RequestUrl?: string;
+  newRequestUrl?: string;
+  editRequestUrl?: string;
+  documentSetLibTitle?: string;
+  relativeUrl?: string;
+  surveyListTitle?: string;
+  siteUrl?: string;
+  spHttpClient: any;
+  values?: any;
+  UploadFiles?: any;
+  setFieldValues?: any;
+  setStateValues?: any;
+  props?: any;
+  reloadData?: any;
+  setApprovalFormStateValues?: any;
+  setApprovalFormFieldValues?: any;
+  tab1Title?: string;
+  tab2Title?: string;
+  tab3Title?: string;
+  tab4Title?:string;
+  configList?: string;
+  stylesUrl?: string;
+  export?: string;
+  ArchiveUrl?: string;
+  VIPAccessUrl?: string;
+  QMGrpId?: number;
+  AdminGrpId?: number;
+  GovernanceGrpId?: number;
+  isDarkTheme?: any;
+  environmentMessage?: string;
+  context?: any;
+  //SetStateValue?:any;
+
+  onPplPickerChange?: (items: any[]) => void;
+  itemLimit?: 1;
+  delayResults?: null;
+  //_onPplPickerChange?:any;
+  _onFilterChanged?: any;
+  onChange?: (items: any[]) => void;
+  onPPlPickerChange?: any;
+  pplPickerName?: any[];
+  webPartProps?: any;
+  itemCount?:number;
+  Disbledtab?:any;
+}

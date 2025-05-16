@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "icc-dashboard-client-side-solution",
+    "id": "18fe2459-c39d-43f0-99f6-97fc5dd69bf4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "ICCDashboard description"
+      },
+      "longDescription": {
+        "default": "ICCDashboard description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "icc-dashboard Feature",
+        "description": "The feature that activates elements of the icc-dashboard solution.",
+        "id": "336f80e3-e3e0-4d16-a6c0-56ffdd88d8d1",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/icc-dashboard.sppkg"
+  }
+}

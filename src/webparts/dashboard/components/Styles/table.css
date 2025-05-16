@@ -1,0 +1,52 @@
+/* .sections{
+    border-radius: 10px;
+} */
+.sections table{
+    border-spacing: 0px;
+    width:100%;
+}
+table thead th {
+    /* font-family: Lato-Bold; */
+    /* font-size: 18px; */
+    color: #fff !important;
+    line-height: 1.4;
+    background-color: #008299 !important;
+    padding:18px 0 18px 0;
+    font-size: 15px !important;
+}
+
+table thead th {   
+    font-size: 15px !important;
+    color: gray;
+    line-height: 1.4;
+    padding-right: 0px !important;
+    text-align: center;
+}
+table thead th span{
+    font-size: 15px !important;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8f6ff
+}
+table tbody tr td{
+    padding:8px 0 8px 0;
+}
+
+table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -moz-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -o-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+    -ms-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+}
+
+.dataTables_scrollHeadInner,.dataTable,.dataTables_scrollBody{
+width:100% !important;
+}
+table.dataTable thead th, table.dataTable thead td{
+    text-align: center !important;
+    padding-right: 10px !important;
+}
