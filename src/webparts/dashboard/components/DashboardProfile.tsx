@@ -210,7 +210,7 @@ const DashboardProfile = (props: any) => {
     try {
       // First batch call - small number
       const batchRequests = await web.lists.getByTitle('Requests').items
-        .select('DeveloperPriority,DeveloperDueDate,BusinessValueScore,RequestPriority,Id,AuthorId,Request_x0020_Due_x0020_Date,RequestName,NegotiatedDueDate,Dev_x0020_Negotiated_x0020_Due_x,QA_x0020_Negotiated_x0020_Due_x0,Priority_x0020_Normal_x0020_or_x,Report_x0020_Name,IsActionDisabled,Assigned_x0020_To/EMail,Assigned_x0020_To/FirstName,Assigned_x0020_To/LastName,Business_x0020_Requestor/EMail,Business_x0020_Requestor/FirstName,Business_x0020_Requestor/LastName,Department/Title,DevelopmentManager/FirstName,DevelopmentManager/LastName,DevelopmentManager/Id,Assigned_x0020_To/Id,Approval_x0020_Needed_x003f_,Status,Request_x0020_No,Developer_x0020_Resource/FirstName,Developer_x0020_Resource/LastName,QA_x0020_Resource/FirstName,QA_x0020_Resource/LastName')
+        .select('Modified,DeveloperPriority,DeveloperDueDate,BusinessValueScore,RequestPriority,Id,AuthorId,Request_x0020_Due_x0020_Date,RequestName,NegotiatedDueDate,Dev_x0020_Negotiated_x0020_Due_x,QA_x0020_Negotiated_x0020_Due_x0,Priority_x0020_Normal_x0020_or_x,Report_x0020_Name,IsActionDisabled,Assigned_x0020_To/EMail,Assigned_x0020_To/FirstName,Assigned_x0020_To/LastName,Business_x0020_Requestor/EMail,Business_x0020_Requestor/FirstName,Business_x0020_Requestor/LastName,Department/Title,DevelopmentManager/FirstName,DevelopmentManager/LastName,DevelopmentManager/Id,Assigned_x0020_To/Id,Approval_x0020_Needed_x003f_,Status,Request_x0020_No,Developer_x0020_Resource/FirstName,Developer_x0020_Resource/LastName,QA_x0020_Resource/FirstName,QA_x0020_Resource/LastName')
         .expand('Assigned_x0020_To,Business_x0020_Requestor,QA_x0020_Resource,Developer_x0020_Resource,DevelopmentManager,Department')
         .orderBy('Modified', false)
         .top(50) // Fetch only 50 items initially
@@ -222,7 +222,7 @@ const DashboardProfile = (props: any) => {
 
       // Then in background fetch full data
       const fullRequests = await web.lists.getByTitle('Requests').items
-        .select('DeveloperPriority,DeveloperDueDate,BusinessValueScore,RequestPriority,Id,AuthorId,Request_x0020_Due_x0020_Date,RequestName,NegotiatedDueDate,Dev_x0020_Negotiated_x0020_Due_x,QA_x0020_Negotiated_x0020_Due_x0,Priority_x0020_Normal_x0020_or_x,Report_x0020_Name,IsActionDisabled,Assigned_x0020_To/EMail,Assigned_x0020_To/FirstName,Assigned_x0020_To/LastName,Business_x0020_Requestor/EMail,Business_x0020_Requestor/FirstName,Business_x0020_Requestor/LastName,Department/Title,DevelopmentManager/FirstName,DevelopmentManager/LastName,DevelopmentManager/Id,Assigned_x0020_To/Id,Approval_x0020_Needed_x003f_,Status,Request_x0020_No,Developer_x0020_Resource/FirstName,Developer_x0020_Resource/LastName,QA_x0020_Resource/FirstName,QA_x0020_Resource/LastName')
+        .select('Modified,DeveloperPriority,DeveloperDueDate,BusinessValueScore,RequestPriority,Id,AuthorId,Request_x0020_Due_x0020_Date,RequestName,NegotiatedDueDate,Dev_x0020_Negotiated_x0020_Due_x,QA_x0020_Negotiated_x0020_Due_x0,Priority_x0020_Normal_x0020_or_x,Report_x0020_Name,IsActionDisabled,Assigned_x0020_To/EMail,Assigned_x0020_To/FirstName,Assigned_x0020_To/LastName,Business_x0020_Requestor/EMail,Business_x0020_Requestor/FirstName,Business_x0020_Requestor/LastName,Department/Title,DevelopmentManager/FirstName,DevelopmentManager/LastName,DevelopmentManager/Id,Assigned_x0020_To/Id,Approval_x0020_Needed_x003f_,Status,Request_x0020_No,Developer_x0020_Resource/FirstName,Developer_x0020_Resource/LastName,QA_x0020_Resource/FirstName,QA_x0020_Resource/LastName')
         .expand('Assigned_x0020_To,Business_x0020_Requestor,QA_x0020_Resource,Developer_x0020_Resource,DevelopmentManager,Department')
         .orderBy('Modified', false)
         .getAll(); // Full fetch
@@ -249,8 +249,8 @@ const DashboardProfile = (props: any) => {
       item.Department = data?.Department?.Title ?? "";
       item.NegotiatedDueDate = moment(data?.NegotiatedDueDate).format("MM/DD/YYYY");
       item.Request_x0020_Due_x0020_Date = moment(data?.Request_x0020_Due_x0020_Date).format("MM/DD/YYYY");
-      item.DeveloperDueDate = moment(data?.DeveloperDueDate).format("MM/DD/YYYY");
-       item.DeveloperPriority = data?.DeveloperPriority ?? "";
+      // item.DeveloperDueDate = moment(data?.DeveloperDueDate).format("MM/DD/YYYY");
+      //  item.DeveloperPriority = data?.DeveloperPriority ?? "";
       item.Business_x0020_Requestor =
         `${data?.Business_x0020_Requestor?.FirstName ?? ""} ${data?.Business_x0020_Requestor?.LastName ?? ""}`.trim();
       item.Developer_x0020_Resource =
@@ -284,6 +284,11 @@ const DashboardProfile = (props: any) => {
       updatedResults?.push(item);
     });
 
+    updatedResults.sort((a: any, b: any) => {
+    const aDate = new Date(a.Modified);
+    const bDate = new Date(b.Modified);
+    return bDate.getTime() - aDate.getTime();
+  });
     const allRequests = updatedResults;
     const createdRequests = allRequests.filter((x: any) => x.AuthorId === state?.currentUser.Id);
     const assignedRequests = allRequests.filter((x: any) =>
@@ -368,17 +373,17 @@ const DashboardProfile = (props: any) => {
       isSortedDescending: column?.key === 'column3' ? isSortedDescending : false,
       onColumnClick: (ev, col) => onColumnHeaderClick(ev, col),
     },
-     {
-      styles: headerStyle,
-      key: 'column3',
-      name: 'Developer Due Date',
-      fieldName: 'DeveloperDueDate',
-      minWidth: 100,
-      maxWidth: 100,
-      isSorted: column?.key === 'column3' ? true : false,
-      isSortedDescending: column?.key === 'column3' ? isSortedDescending : false,
-      onColumnClick: (ev, col) => onColumnHeaderClick(ev, col),
-    },
+    //  {
+    //   styles: headerStyle,
+    //   key: 'column3',
+    //   name: 'Developer Due Date',
+    //   fieldName: 'DeveloperDueDate',
+    //   minWidth: 100,
+    //   maxWidth: 100,
+    //   isSorted: column?.key === 'column3' ? true : false,
+    //   isSortedDescending: column?.key === 'column3' ? isSortedDescending : false,
+    //   onColumnClick: (ev, col) => onColumnHeaderClick(ev, col),
+    // },
     {
       styles: headerStyle,
       key: 'column4',
@@ -390,17 +395,17 @@ const DashboardProfile = (props: any) => {
       isSortedDescending: column?.key === 'column4' ? isSortedDescending : false,
       onColumnClick: (ev, col) => onColumnHeaderClick(ev, col),
     },
-     {
-      styles: headerStyle,
-      key: 'column4',
-      name: 'Developer Priority',
-      fieldName: 'DeveloperPriority',
-      minWidth: 100,
-      maxWidth: 100,
-      isSorted: column?.key === 'column4' ? true : false,
-      isSortedDescending: column?.key === 'column4' ? isSortedDescending : false,
-      onColumnClick: (ev, col) => onColumnHeaderClick(ev, col),
-    },
+    //  {
+    //   styles: headerStyle,
+    //   key: 'column4',
+    //   name: 'Developer Priority',
+    //   fieldName: 'DeveloperPriority',
+    //   minWidth: 100,
+    //   maxWidth: 100,
+    //   isSorted: column?.key === 'column4' ? true : false,
+    //   isSortedDescending: column?.key === 'column4' ? isSortedDescending : false,
+    //   onColumnClick: (ev, col) => onColumnHeaderClick(ev, col),
+    // },
     {
       styles: headerStyle,
       key: 'column5',
